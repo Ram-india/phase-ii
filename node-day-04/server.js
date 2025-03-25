@@ -50,6 +50,30 @@ app.put("/books/:id",(req,res)=>{
         res.status(200).json(books[bookIndex]);
     }
 });
+//5.PATCH: Update a book (partially update a book)
+app.patch("/books/:id",(req,res)=>{
+    const bookId = parseInt(req.params.id);
+    const updatedBook = req.body;
+    const bookIndex = books.findIndex((book) => book.id === bookId);
+    if(bookIndex === -1){
+        res.status(404).json({error: "Book not found"});
+    }else{
+        books[bookIndex] = {...books[bookIndex], ...updatedBook};
+        res.status(200).json(books[bookIndex]);
+    }
+});
+
+//5.Delete: Remove a book
+app.delete("/books/:id",(req,res)=>{
+    const bookId = parseInt(req.params.id);
+    const bookIndex = books.findIndex((book) => book.id === bookId);
+    if(bookIndex === -1){
+        res.status(404).json({error: "Book not found"});
+    }else{
+        const deletedBook = books.splice(bookIndex,1);
+        res.json(deletedBook [0]);
+    }
+});
 
 //start the server
 app.listen(port,()=>{
