@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/dbConfig');
+const taskRoutes = require("./routes/taskRoutes");
 
 const app = express();
 
@@ -10,7 +11,11 @@ app.use(bodyParser.json);
 
 //connect to mangoDB
 connectDB();
-const PORT = process.env.PORT || 3000;
+
+// Routes
+app.use("/api/tasks", taskRoutes);
+
+const PORT = 3000;
 app.listen(PORT, () =>{
-    console.log(`Server is running on port${PORT }`);
+    console.log(`Server is running on port ${PORT }`);
 });
