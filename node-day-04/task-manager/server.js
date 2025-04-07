@@ -7,7 +7,7 @@ const app = express();
 
 //middleware
 
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 //connect to mangoDB
 connectDB();
